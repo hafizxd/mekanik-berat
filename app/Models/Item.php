@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use App\Models\Reparation;
+use App\Models\Scan;
 
 class Item extends Model
 {
@@ -12,7 +14,11 @@ class Item extends Model
 
     protected $guarded = [];
 
-    public function user() {
-        return $this->belongsTo(User::class, 'mekanik_id');
+    public function reparations() {
+        return $this->hasMany(Reparation::class);
+    }
+
+    public function scans() {
+        return $this->hasMany(Scan::class);
     }
 }

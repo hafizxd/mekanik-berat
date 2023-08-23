@@ -15,7 +15,7 @@
     <div>
         <h1>QR COY</h1>
         <div class="visible-print text-center">
-            <img src="data:image/png;base64, {!! base64_encode(QrCode::size(300)->generate($item->id)) !!} ">
+            <img src="data:image/png;base64, {!! base64_encode(QrCode::size(500)->generate($item->unique_code)) !!} ">
         </div>
     </div>
 </body>

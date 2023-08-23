@@ -21,8 +21,6 @@ return new class extends Migration
             $table->integer('lifting_height');
             $table->integer('stage');
             $table->integer('load_center');
-            $table->tinyInteger('status');
-            $table->foreignId('mekanik_id')->references('id')->on('users')->nullable();
             $table->timestamps();
         });
     }
