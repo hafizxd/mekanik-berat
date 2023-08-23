@@ -10,8 +10,25 @@ use App\Models\Item;
 
 class ItemController extends Controller
 {
+    public function list() {
+        $items = auth()->user()->items();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Success',
+            'payload' => $items
+        ]);   
+    }
+
     public function show($id) {
         $item = Item::findOrFail($id);
+
+        if (!isset($item->mekanik)) {
+            $item->update([
+                'mekanik_id' => auth()->user()->id
+            ]);
+        }
+        
         $item->isMaintained = $item->mekanik_id == auth()->user()->id ? true : false;
 
         return response()->json([
