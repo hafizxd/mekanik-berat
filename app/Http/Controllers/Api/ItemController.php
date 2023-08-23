@@ -8,11 +8,17 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Item;
+use App\Models\Scan;
 
 class ItemController extends Controller
 {
     public function list() {
-        $items = auth()->user()->items();
+        $scans = auth()->user()->scans()->with('item')->get();
+
+        $items = [];
+        foreach ($scans as $scan) {
+            $items[] = $scan->item;
+        }
 
         return response()->json([
             'success' => true,
@@ -22,7 +28,7 @@ class ItemController extends Controller
     }
 
     public function show($id) {
-        $item = auth()->user()->items()->findOrFail($id);
+        $item = Scan::where('user_id', auth()->user()->id)->where('item_id', $id)->firstOrFail()->item;
 
         return response()->json([
             'success' => true,

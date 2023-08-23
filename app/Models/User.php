@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Laravel\Sanctum\HasApiTokens;
-use App\Models\Item;
+use App\Models\Scan;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -56,8 +56,8 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function items() 
+    public function scans() 
     {
-        return $this->hasMany(Item::class, 'mekanik_id');
+        return $this->hasMany(Scan::class);
     }
 }
