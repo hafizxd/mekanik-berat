@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController as ApiAuthController;
+use App\Http\Controllers\Api\ItemController as ApiItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,12 +16,15 @@ use App\Http\Controllers\Api\AuthController as ApiAuthController;
 |
 */
 
-Route::controller(ApiAuthController::class)->group(function () {
-    Route::post('login', 'login');
-    Route::post('register', 'register');
+Route::post('login', [ApiAuthController::class, 'login'])->name('login');
+Route::post('register', [ApiAuthController::class, 'register'])->name('register');
 
-    Route::middleware('auth:api')->group(function () {
-        Route::post('logout', 'logout');
-        Route::post('refresh', 'refresh');
+Route::middleware('auth:api')->group(function () {
+    Route::post('logout', [ApiAuthController::class, 'logout'])->name('logout');
+    Route::post('refresh', [ApiAuthController::class, 'refresh'])->name('refresh');
+
+    Route::prefix('items')->name('items.')->controller(ApiItemController::class)->group(function () {
+        Route::get('{id}', 'show')->name('show');
+        Route::post('store', 'store')->name('store');
     });
 });
