@@ -62,6 +62,14 @@ class ItemController extends Controller
             ], 404);
         }
 
+        if ($item->scans()->where('user_id', auth()->user()->id)->exists()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Alat mekanik sudah pernah ditambahkan',
+                'payload' => []
+            ], 400);
+        }
+
         $item->scans()->create([ 'user_id' => auth()->user()->id ]);
 
         return response()->json([
@@ -78,9 +86,9 @@ class ItemController extends Controller
             'hours_meter' => 'required|numeric',
             'capacity' => 'required|numeric',
             'engine' => 'required',
-            'lifting_height' => 'required|numeric',
-            'stage' => 'required|numeric',
-            'load_center' => 'required|numeric'
+            'lifting_height' => 'nullable|numeric',
+            'stage' => 'nullable|numeric',
+            'load_center' => 'nullable|numeric'
         ]);
 
         if ($validator->fails()) {
