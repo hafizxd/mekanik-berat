@@ -28,10 +28,10 @@ Route::middleware('auth:api')->group(function () {
         Route::post('scan', 'scan')->name('scan');
 
         Route::get('/', 'list')->name('list');
-        Route::get('{id}', 'show')->name('show');
-        Route::get('{id}/reparations', 'getReparation');
-        Route::post('{id}/reparations/store', 'storeReparation');
-        Route::get('{id}/reparations/{reparationId}', 'showReparation');
-        Route::post('{id}/reparations/{reparationId}/update', 'updateReparation');
+        Route::get('{itemId}', 'show')->name('show');
+        Route::get('{itemId}/reparations', 'listReparation');
+        Route::post('{itemId}/reparations/store', 'storeReparation');
+        Route::get('{itemId}/reparations/{reparationId}', 'showReparation');
+        Route::post('{itemId}/reparations/{reparationId}/update', 'updateReparation');
     });
 });

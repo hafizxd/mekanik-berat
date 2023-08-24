@@ -14,11 +14,23 @@ class Item extends Model
 
     protected $guarded = [];
 
+    protected $appends = ['latest_status'];
+
     public function reparations() {
         return $this->hasMany(Reparation::class);
     }
 
     public function scans() {
         return $this->hasMany(Scan::class);
+    }
+
+    protected function getLatestStatusAttribute() {
+        $reparation = Reparation::where('item_id', $this->id)->orderBy('created_at', 'desc')->select('status')->first();
+
+        if (isset($reparation)) {
+            return $reparation->status;
+        }
+
+        return 1;
     }
 }
