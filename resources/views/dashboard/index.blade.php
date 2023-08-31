@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+        <h2 class="font-semibold text-xl text-primary leading-tight">
+            {{ __('Alat Berat') }}
         </h2>
     </x-slot>
 
@@ -52,7 +52,7 @@
 
                                                     <td class="whitespace-nowrap px-6 py-4">
                                                         <a href="{{ route('dashboard.show', ['id' => $item->id]) }}">
-                                                            <button class="border-sky-500 border rounded-md px-3 py-2 hover:bg-sky-500 text-sky-500 hover:text-white transition duration-200 ease-in-out">Riwayat Perbaikan</button>
+                                                            <button class="border-primary border rounded-md px-3 py-2 hover:bg-primary-light text-primary hover:text-white transition duration-200 ease-in-out">Riwayat Perbaikan</button>
                                                         </a>
                                                     </td>
                                                 </tr>
