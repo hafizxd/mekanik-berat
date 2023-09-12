@@ -116,14 +116,6 @@ class ItemController extends Controller
 
         $pdf = Pdf::loadView('pdf.qr-code', compact('item'));
         return $pdf->download('qr_code.pdf');
-        // return response()->json([
-        //     'success' => true,
-        //     'message' => 'Success',
-        //     'payload' => [
-        //         'item' => $item,
-        //         'qr_code_file' => base64_encode(file_get_contents(public_path() . '\\oke\\'.$item->id.'.pdf'))
-        //     ]
-        // ]);
     }
 
     private function generateRandString() {

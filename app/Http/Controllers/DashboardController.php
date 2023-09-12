@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use App\Models\Reparation;
 use App\Models\Item;
@@ -23,5 +24,17 @@ class DashboardController extends Controller
             ->get();
 
         return view('dashboard.detail', compact('item', 'reparations'));
+    }
+
+    public function export($id) {
+        $item = Item::findOrFail($id);
+
+        $reparations = Reparation::with('user')
+            ->where('item_id', $item->id)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        
+        $pdf = Pdf::loadView('pdf.history', compact('item', 'reparations'));
+        return $pdf->download('history_reparations.pdf');
     }
 }
