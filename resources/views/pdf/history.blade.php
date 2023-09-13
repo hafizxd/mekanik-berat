@@ -26,7 +26,7 @@
 </head>
 
 <body>
-    <h1 style="margin-bottom: 20px; text-align: center;">Riwayat Perbaikan</h1>
+    <h3 style="margin-bottom: 20px; text-align: center;">Riwayat Perbaikan Alat {{ $item->jenis }} {{ $item->type }}</h3>
 
     <table style="width: 100%;">
         <thead>
@@ -49,7 +49,7 @@
                     <td class="whitespace-nowrap px-6 py-4">{{ number_format($reparation->hours_meter, 0, ',', '.') }} jam</td>
                     <td class="whitespace-nowrap px-6 py-4">{{ $reparation->note }}</td>
                     <td class="whitespace-nowrap px-6 py-4">
-                        @if ($item->latest_status == 1)
+                        @if ($reparation->status == 1)
                             Bekerja
                         @else
                             Perbaikan
