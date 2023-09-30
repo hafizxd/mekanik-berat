@@ -51,9 +51,17 @@
                                                     </td>
 
                                                     <td class="whitespace-nowrap px-6 py-4">
-                                                        <a href="{{ route('dashboard.show', ['id' => $item->id]) }}">
-                                                            <button class="border-primary border rounded-md px-3 py-2 hover:bg-primary-light text-primary hover:text-white transition duration-200 ease-in-out">Riwayat Perbaikan</button>
-                                                        </a>
+                                                        <div class="flex justify-center gap-2">
+                                                            <a href="{{ route('dashboard.show', ['id' => $item->id]) }}">
+                                                                <button class="border-primary border rounded-md px-3 py-2 hover:bg-primary-light text-primary hover:text-white transition duration-200 ease-in-out">Riwayat Perbaikan</button>
+                                                            </a>
+
+                                                            <form action="{{ route('dashboard.delete', ['id' => $item->id]) }}" method="post">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <input class="border-red-700 border rounded-md px-3 py-2 hover:bg-red-700 text-red-700 hover:text-white transition duration-200 ease-in-out" type="submit" value="Hapus">
+                                                            </form>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             @endforeach

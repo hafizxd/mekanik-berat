@@ -37,4 +37,12 @@ class DashboardController extends Controller
         $pdf = Pdf::loadView('pdf.history', compact('item', 'reparations'));
         return $pdf->download('history_reparations.pdf');
     }
+
+    public function delete($id) {
+        $item = Item::findOrFail($id);
+
+        $item->delete();
+        
+        return redirect()->back();
+    }
 }

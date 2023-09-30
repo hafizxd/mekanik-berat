@@ -30,6 +30,7 @@ Route::middleware('web.auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/items/{id}', [DashboardController::class, 'show'])->name('dashboard.show');
     Route::get('/items/{id}/export', [DashboardController::class, 'export'])->name('dashboard.export');
+    Route::delete('/items/{id}/delete', [DashboardController::class, 'delete'])->name('dashboard.delete');
 });
 
 require __DIR__.'/auth.php';
