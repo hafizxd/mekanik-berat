@@ -118,6 +118,27 @@ class ItemController extends Controller
         return $pdf->download('qr_code.pdf');
     }
 
+    public function delete($id) {
+        $item = Item::findOrFail($id);
+
+        $exists = auth()->user()->scans()->where('item_id', $id)->exists();
+        if (!$exists) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Tidak boleh menghapus alat yg belum discan',
+                'payload' => []
+            ], 403);
+        }
+
+        $item->delete();
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'Berhasil menghapus alat mekanik',
+            'payload' => []
+        ]);
+    }
+
     private function generateRandString() {
         $code = Str::random(15);
 

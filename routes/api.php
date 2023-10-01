@@ -29,6 +29,7 @@ Route::middleware('auth:api')->group(function () {
 
         Route::get('/', 'list')->name('list');
         Route::get('{itemId}', 'show')->name('show');
+        Route::delete('{itemId}/delete', 'delete')->name('delete');
         Route::get('{itemId}/reparations', 'listReparation');
         Route::post('{itemId}/reparations/store', 'storeReparation');
         Route::get('{itemId}/reparations/{reparationId}', 'showReparation');
